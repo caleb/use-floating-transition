@@ -1,5 +1,5 @@
 {
-  "name": "use-floating-transition",
+  "name": "@caleb.land/use-floating-transition",
   "version": "1.0.0",
   "description": "Some components and hooks for making headlessui's Transition work with floating-ui",
   "main": "dist/index.js",

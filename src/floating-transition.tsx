@@ -97,14 +97,22 @@ export function useFloatingTransition(show: boolean, useFloatOptions = {}) {
 }
 
 export function FloatingTransition(props: any) {
-  const { state, children, ...rest } = props
+  const { state, children, afterLeave: afterLeaveTransition, ...rest } = props
+  const {visible, afterLeave: afterLeaveFloating} = state
+
+  const afterLeave = React.useCallback(function() {
+    afterLeaveFloating()
+    if (afterLeaveTransition) {
+      afterLeaveTransition()
+    }
+  }, [afterLeaveTransition, afterLeaveFloating])
 
   if (state.visible) {
     return (
       <Transition show={state.show}
         unmount={false}
         as={React.Fragment}
-        afterLeave={state.afterLeave}
+        afterLeave={afterLeave}
         {...rest}>
         {children}
       </Transition>);
