@@ -65,10 +65,15 @@ export function useFloatingTransition(show: boolean, useFloatOptions = {}) {
     updateIsTransitioning(false)
   }, [])
   const { reference, floating, update } = useFloating(useFloatOptions)
+  const isFirstRender = React.useRef(true)
 
   React.useLayoutEffect(function () {
-    updateIsTransitioning(true)
-    updateTransitioningTo(show)
+    if (! isFirstRender) {
+      updateIsTransitioning(true)
+      updateTransitioningTo(show)
+    } else {
+      isFirstRender.current = false
+    }
   }, [show]);
 
   React.useLayoutEffect(function () {
