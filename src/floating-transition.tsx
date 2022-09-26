@@ -74,7 +74,7 @@ export function useFloatingTransition(show: boolean, useFloatOptions = {}) {
     } else {
       isFirstRender.current = false
     }
-  }, [show]);
+  }, [show, isFirstRender.current]);
 
   React.useLayoutEffect(function () {
     update()
