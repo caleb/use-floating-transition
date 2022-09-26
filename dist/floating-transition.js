@@ -61,9 +61,15 @@ function useFloatingTransition(show, useFloatOptions = {}) {
         updateIsTransitioning(false);
     }, []);
     const { reference, floating, update } = useFloating(useFloatOptions);
+    const isFirstRender = react_2.default.useRef(true);
     react_2.default.useLayoutEffect(function () {
-        updateIsTransitioning(true);
-        updateTransitioningTo(show);
+        if (!isFirstRender) {
+            updateIsTransitioning(true);
+            updateTransitioningTo(show);
+        }
+        else {
+            isFirstRender.current = false;
+        }
     }, [show]);
     react_2.default.useLayoutEffect(function () {
         update();
